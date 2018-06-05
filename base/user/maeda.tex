@@ -5,7 +5,7 @@
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.6]{picture/eps/ele_circuit_fig1.eps}
+\includegraphics[scale=0.7]{picture/eps/ele_circuit_fig1.eps}
 \caption{回路図}
 \label{fig::overall_electric_circuit}
 \end{figure}
@@ -66,7 +66,7 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 \newpage
 
 \subsection{ステアリング用の回路}
-ステアリング用の回路ではサーボモータと降圧を行うためのDC-DCコンバータから構成されている．以下にその仕様を示す．ここで，サーボモータのGNDはRaspberryPi3 ModelBのそれと共通である．DC-DCコンバータは内部でディジタルスイッチングを行っているため,ノイズが生じてしまう\cite{dcdc}.本回路ではこのようなノイズ成分を平滑化するために電解コンデンサ(OSコンデンサ$10\unit{V}47\unit{\muF}$)を用いた\refig{ele_cap}の回路を作成した\cite{dcdcconverter}.
+ステアリング用の回路ではサーボモータと降圧を行うためのDC-DCコンバータから構成されている．以下にその仕様を示す．ここで，サーボモータのGNDはRaspberryPi3 ModelBのそれと共通である．DC-DCコンバータは内部でディジタルスイッチングを行っているため,ノイズが生じてしまう\cite{dcdc}.本回路ではこのようなノイズ成分を平滑化するために電解コンデンサ(OSコンデンサ$10\unit{V}47\unit{\mu F}$)を用いた\refig{ele_cap}の回路を作成した\cite{dcdcconverter}.
 
 \begin{description}
     \item[DC-DCコンバータ\textless BTD05-05S200D\textgreater \cite{dcdcconverter}]\mbox{}\\
@@ -87,7 +87,7 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{picture/eps/ele_cap.eps}
+\includegraphics[scale=1.0]{picture/eps/ele_cap.eps}
 \caption{DC-DCコンバータの回路図}
 \label{fig::ele_cap}
 \end{figure}

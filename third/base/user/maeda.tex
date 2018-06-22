@@ -1,17 +1,32 @@
-
 \section{回路設計}
-今回設計した回路を\refig{overall_electric_circuit},回路制作に使用した主要な部品の一覧を\reftab{circuit_parts}にそれぞれ示す.さらに駆動系の回路に関してその仕様や構成について以下に示す.
+今回設計した駆動部，距離センサ部，マイコン周辺部の回路図を\refig{dc_motor_unit}，\refig{sensor_unit}，\refig{control_unit}にそれぞれ示す．
+また回路制作に使用した主要な部品の一覧を\reftab{circuit_parts}に示す.
+さらに駆動系の回路に関してその詳細な仕様や構成について以下で述べる．
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{picture/eps/dc_motor_unit.eps}
+\caption{駆動部}
+\label{fig::dc_motor_unit}
+\end{figure}
+
+
+\begin{figure}[b]
+\centering
+\includegraphics[scale=1]{picture/eps/sensor_unit.eps}
+\caption{距離センサ部}
+\label{fig::sensor_unit}
+\end{figure}
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{picture/eps/ele_circuit_fig1.eps}
-\caption{回路図}
-\label{fig::overall_electric_circuit}
+\includegraphics[scale=0.5]{picture/eps/control_unit.eps}
+\caption{マイコン周辺部}
+\label{fig::control_unit}
 \end{figure}
 
 \clearpage
-
 
 \begin{table}
 　   \caption{電気回路用部品}
@@ -43,19 +58,24 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 
 \subsection{全体の回路構成}
 
-\refig{overall_electric_circuit}に示すように本回路では$7.2\unit{V}$バッテリと$5\unit{V}$バッテリの2つを用いており,$7.2\unit{V}$バッテリはまず分流を行い一方をDC-DCコンバータを用いて$7.2\unit{V}$から$5\unit{V}$に降圧してサーボモータに供給し,もう一方をDCモータドライバに供給している.$5\unit{V}$バッテリはRaspberryPi3 Model Bにのみ電源を供給している.このような回路構成をとることで，RaspberryPi3    ModelBへの電源供給に対してフィルタを用いたノイズ対策を行う必要がなく安定な動作を行うことができるというメリットがある\cite{motor}．
+\refig{all_circuit}の回路では$7.2\unit{V}$バッテリと$5\unit{V}$バッテリの2つを用いており，$7.2\unit{V}$バッテリはまず分流を行い一方をDC-DCコンバータを用いて$7.2\unit{V}$から$5\unit{V}$に降圧してサーボモータに供給し，もう一方をDCモータドライバに供給している．$5\unit{V}$バッテリはRaspberryPi3 Model Bにのみ電源を供給している．このような回路構成をとることで，RaspberryPi3    ModelBへの電源供給に対してフィルタを用いたノイズ対策を行う必要がなく安定した動作を行うことができるというメリットがある\cite{motor}．
 
-\subsection{後輪駆動部の回路}
+
+\subsection{駆動部の回路}
+\refig{dc_motor_unit}は車体駆動部回路を示している．駆動部回路は後輪駆動部回路とステアリング回路から構成されている．以下で詳細について説明する．
+
+
+\subsubsection{後輪駆動部の回路}
 後輪駆動部の回路は主にモータドライバとDCモータから構成されている．以下にその仕様を示す．DCモータには，ノイズを軽減するためにセラミックコンデンサを取り付けた\cite{motor}．
 \begin{description}
-    \item[モータドライバ\textless MD10CR3\textgreater \cite{motordriver}]\mbox{}\\
+    \item[モータドライバ\textless MD10CR3(Cytron technologies社製)\textgreater \cite{motordriver}]\mbox{}\\
     \vspace{-5mm}
         \begin{itemize}
             \item 対応モータ電圧: DC $5\unit{V}-25\unit{V}$
             \item 最大電流　　: $13\unit{A}$
             \item ロジック入力電圧: $3.3\unit{V}-5\unit{V}$
         \end{itemize}
-     \item[DCモータ\textless　RP380\textgreater\cite{R380}]\mbox{}\\
+     \item[DCモータ\textless　RP380(マブチモーター社製）\textgreater\cite{R380}]\mbox{}\\
      \vspace{-5mm}
          \begin{itemize}
             \item 適正電圧:$7.2\unit{V}$
@@ -65,11 +85,11 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 
 \newpage
 
-\subsection{ステアリング用の回路}
-ステアリング用の回路ではサーボモータと降圧を行うためのDC-DCコンバータから構成されている．以下にその仕様を示す．ここで，サーボモータのGNDはRaspberryPi3 ModelBのそれと共通である．DC-DCコンバータは内部でディジタルスイッチングを行っているため,ノイズが生じてしまう\cite{dcdc}.本回路ではこのようなノイズ成分を平滑化するために電解コンデンサ(OSコンデンサ$10\unit{V}47\unit{\mu F}$)を用いた\refig{ele_cap}の回路を作成した\cite{dcdcconverter}.
+\subsubsection{ステアリング回路}
+ステアリング用の回路ではサーボモータと降圧を行うためのDC-DCコンバータから構成されている．以下にその仕様を示す．ここで，サーボモータのGNDはRaspberryPi3 ModelBのそれと共通である．DC-DCコンバータは内部でディジタルスイッチングを行っているため，ノイズが生じてしまう\cite{dcdc}．本回路ではこのようなノイズ成分を平滑化するために電解コンデンサ(OSコンデンサ$10\unit{V}47\unit{\mu F}$)を用いた\refig{dcdc_unit}の回路を作成した\cite{dcdcconverter}.
 
 \begin{description}
-    \item[DC-DCコンバータ\textless BTD05-05S200D\textgreater \cite{dcdcconverter}]\mbox{}\\
+    \item[DC-DCコンバータ(Bellnix社製)\textless BTD05-05S200D\textgreater \cite{dcdcconverter}]\mbox{}\\
     \vspace{-5mm}
         \begin{itemize}
             \item 入力電圧: DC $4.5\unit{V}-9\unit{V}$
@@ -87,11 +107,8 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1.0]{picture/eps/ele_cap.eps}
+\includegraphics[scale=0.8]{picture/eps/dcdc_unit.eps}
 \caption{DC-DCコンバータの回路図}
-\label{fig::ele_cap}
+\label{fig::dcdc_unit}
 \end{figure}
-
-
-
 

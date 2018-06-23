@@ -1,8 +1,3 @@
-\section{回路設計}
-今回設計した駆動部，距離センサ部，マイコン周辺部の回路図を\refig{dc_motor_unit}，\refig{sensor_unit}，\refig{control_unit}にそれぞれ示す．
-また回路制作に使用した主要な部品の一覧を\reftab{circuit_parts}に示す.
-さらに駆動系の回路に関してその詳細な仕様や構成について以下で述べる．
-
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{picture/eps/dc_motor_unit.eps}
@@ -10,6 +5,10 @@
 \label{fig::dc_motor_unit}
 \end{figure}
 
+\section{回路設計}
+今回設計した駆動部，距離センサ部，マイコン周辺部の回路図を\refig{dc_motor_unit}，\refig{sensor_unit}，\refig{control_unit}にそれぞれ示す．
+また回路制作に使用した主要な部品の一覧を\reftab{circuit_parts}に示す.
+さらに駆動系の回路に関してその詳細な仕様や構成について以下で述べる．
 
 \begin{figure}[b]
 \centering
@@ -17,7 +16,6 @@
 \caption{距離センサ部}
 \label{fig::sensor_unit}
 \end{figure}
-
 
 \begin{figure}[h]
 \centering
@@ -58,7 +56,7 @@ DC-DCコンバータ        　 &BTD05-05S200D                                  
 
 \subsection{全体の回路構成}
 
-\refig{all_circuit}の回路では$7.2\unit{V}$バッテリと$5\unit{V}$バッテリの2つを用いており，$7.2\unit{V}$バッテリはまず分流を行い一方をDC-DCコンバータを用いて$7.2\unit{V}$から$5\unit{V}$に降圧してサーボモータに供給し，もう一方をDCモータドライバに供給している．$5\unit{V}$バッテリはRaspberryPi3 Model Bにのみ電源を供給している．このような回路構成をとることで，RaspberryPi3    ModelBへの電源供給に対してフィルタを用いたノイズ対策を行う必要がなく安定した動作を行うことができるというメリットがある\cite{motor}．
+今回設計した回路では$7.2\unit{V}$バッテリと$5\unit{V}$バッテリの2つを用いており，$7.2\unit{V}$バッテリはまず分流を行い一方をDC-DCコンバータを用いて$7.2\unit{V}$から$5\unit{V}$に降圧してサーボモータに供給し，もう一方をDCモータドライバに供給している．$5\unit{V}$バッテリはRaspberryPi3 Model Bにのみ電源を供給している．このような回路構成をとることで，RaspberryPi3 Model Bへの電源供給に対してフィルタを用いたノイズ対策を行う必要がなく安定した動作を行うことができるというメリットがある\cite{motor}．
 
 
 \subsection{駆動部の回路}

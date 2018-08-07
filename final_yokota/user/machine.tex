@@ -1,5 +1,5 @@
 \section{ロボカー}
-\subsection{機体}
+\subsection{機体概要}
 \refig{figure1}に配布されたロボカーのベース部を示す．本体の前方には前輪を駆動させロボカーを旋回させるためのサーボモータを設置した．そして，ロボカーの後方には後輪を駆動させ機体を動かすためのDCモータと角速度を計測するためのロータリーエンコーダを設置した．
 
 ベース部の上部に他の部品を設置するために，加工と絶縁が容易な点を考慮し，ユニバーサルプレートを二層に設置した．\refig{figure2}，\refig{figure3}に搭載する部品のレイアウトを示す．\refig{figure2}より中央にはDCモータを制御するためのモータドライバ，後方には各部品に電力を供給するための7.2Vバッテリ，前方にはRaspberryPi3 Model Bに電力を供給するするための5Vバッテリを設置した．\refig{figure3}より，一番上にはRaspberryPi3 Model BとDC/DCコンバータを含めた電気回路を設置し，その後方に電源用のスイッチと走りだすためのスイッチを設置した．ロボカーの前と左右に壁との距離を測るためのToF(Time-of-Flight)センサを設置した．
@@ -49,7 +49,7 @@ $5\unit{cm}〜70\unit{cm}$まで$5\unit{cm}$ずつToFセンサで測距を5回�
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.5\hsize]{picture/eps/graph.eps}
+  \includegraphics[width=0.5\hsize]{picture/eps/osada_graph.eps}
   \caption{ToFセンサの特性}
   \label{fig::tof_graph}
  \end{figure}
